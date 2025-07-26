@@ -1,3 +1,43 @@
+
+## Pyenv
+> 프로젝트 별 파이썬 버전을 관리하기 좋음
+ 
+```sh
+pyenv install --list # 설치 가능한 목록
+```
+
+```sh
+pyenv install 3.12.3 # 해당 버전 설치
+```
+
+```sh
+pyenv local 3.12.3 # 해당 디렉토리 파이썬 버전 설정
+pyenv global 3.12.3 # 전역 파이썬 버전 설정
+```
+
+
+
+## Poetry
+> node의 package.json과 같이 모듈 버전 관리에 용이 한듯
+
+```sh
+poetry env info
+```
+
+```sh
+poetry env use /Users/kimzerovirus/.pyenv/versions/3.12.3/bin/python # pyenv 사용시 다음과 같은 경로이다.
+```
+
+```sh
+poetry env list
+```
+
+```sh
+poetry env remove [list에서 찾은 이름]
+```
+
+## Fast API
+
 api docs
 ```shell
 http://localhost:8000/docs
@@ -40,11 +80,3 @@ models.Base.metadata.create_all(bind=engine)
 
 ## DI
 https://fastapi.tiangolo.com/tutorial/dependencies/
-
-
-<br/>
-<br/>
-<br/>
-
-점프 투 FastAPI<br/>
-https://wikidocs.net/book/8531
