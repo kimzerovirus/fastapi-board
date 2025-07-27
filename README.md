@@ -36,7 +36,18 @@ poetry env list
 poetry env remove [list에서 찾은 이름]
 ```
 
+```shell
+poetry shell
+poetry install
+poetry add
+```
+
 ## Fast API
+서버 실행
+```shell
+uvicorn main:app --reload --port 8080
+```
+
 
 api docs
 ```shell
