@@ -13,7 +13,7 @@ class UserService:
         self.ulid = ULID()
         self.crypto = Crypto()
 
-    def crate_user(self, name: str, email: str, password: str) -> User:
+    def create_user(self, name: str, email: str, password: str) -> User:
         _user = None
         try:
             _user = self.user_repo.find_by_email(email)
