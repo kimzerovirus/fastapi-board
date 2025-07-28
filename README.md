@@ -20,6 +20,15 @@ pyenv global 3.12.3 # 전역 파이썬 버전 설정
 ## Poetry
 > node의 package.json과 같이 모듈 버전 관리에 용이 한듯
 
+```shell
+python -m pip install --user pipx
+python -m pipx ensurepath
+pipx install poetry
+poetry env use 3.11
+poetry env remove python
+poetry shell
+```
+
 ```sh
 poetry env info
 ```
