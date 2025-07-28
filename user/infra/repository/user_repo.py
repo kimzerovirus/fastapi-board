@@ -1,5 +1,43 @@
-from user.domain.repository.user_repo import IUserRepository
+from fastapi import HTTPException
+from utils.db_utils import row_to_dict
 
+from database import SessionLocal
+from user.domain.repository.user_repo import IUserRepository
+from user.domain.user import User as UserVO
+from user.infra.db_models.user import User
 
 class UserRepository(IUserRepository):
-    pass
+    def save(self, user: UserVO):
+        new_user = User(
+            id=user.id,
+            email=user.email,
+            name=user.name,
+            password=user.password,
+            created_at=user.created_at,
+            updated_at=user.updated_at,
+        )
+
+        with SessionLocal() as db: # 세션 객체를 생성해서 사용할 때 with 구문을 사용해 세션이 자동으로 닫히게 한다.
+            try :
+                db = SessionLocal()
+                db.add(new_user)
+                db.commit()
+            finally:
+                db.close()
+
+    def find_by_email(self, email: str) -> User:
+        with SessionLocal() as db:
+            user = db.query(User).filter(User.email == email).first()
+
+            if not user:
+                raise HTTPException(status_code=422)
+
+            # return UserVO(
+            #     id=user.id,
+            #     name=user.name,
+            #     email=user.email,
+            #     password=user.password,
+            #     created_at=user.created_at,
+            #     updated_at=user.updated_at,
+            # )
+            return UserVO(**row_to_dict(user))

@@ -65,7 +65,7 @@ http://localhost:8000/docs
 
 ```shell
 ### ORM Library ###
-pip install sqlalchemy
+poetry add sqlalchemy
 ```
 
 sqlite는 파이썬 기본 패키지에 포함되어 있음
@@ -73,7 +73,7 @@ sqlite는 파이썬 기본 패키지에 포함되어 있음
 ## 모델을 이용하여 테이블 자동 생성
 SQLAlchemy의 alembic을 이용해 데이터베이스 테이블을 생성할 수 있음
 ```shell
-pip install alembic
+poetry add alembic
 ```
 
 alembic 초기화
@@ -81,11 +81,22 @@ alembic 초기화
 
 alembic init migrations
 ```
-alembic.ini 파일이 생성된다.
+alembic.ini 파일이 생성된다. url 주소를 설정한다.
 <br/>
+```ini
+sqlalchemy.url = sqlite:///./myapi.db
+```
+
+`migrations/env.py`에 database metadata를 설정한다. 
+```python
+import database
+...
+target_metadata = database.Base.metadata,
+```
+
 리비전 파일 생성
 ```sh
-alembic revision --autogenerate
+alembic revision --autogenerate -m "revision message"
 alembic upgrade head
 ```
 위 과정을 통해 데이터베이스에 모델에서 정의한 테이블이 생성된다.

@@ -11,6 +11,8 @@ fastapi = "^0.116.1"
 uvicorn = "^0.35.0"
 py-ulid = "^1.0.3"
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+sqlalchemy = "^2.0.41"
+alembic = "^1.16.4"
 
 
 [build-system]
