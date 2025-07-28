@@ -111,3 +111,9 @@ models.Base.metadata.create_all(bind=engine)
 
 ## DI
 https://fastapi.tiangolo.com/tutorial/dependencies/
+
+> fastapi가 제공하는 방식이 있고, dependency-injector를 활용하는 방법이 있음
+
+fastapi는 Depends 함수를 이용해 의존성을 주입한다.
+`dependency-injector` 를 이용하면 IoC(제어의 역전) 컨테이너 스타일의 클래스 기반 DI를 지원해서, 더 명시적이고 구조화된 방식으로 의존성을 주입할 수 있음
+~~근데 이렇게 사용할거면 스프링이 훨 낫지 싶음~~
