@@ -10,6 +10,7 @@ python = "^3.11"
 fastapi = "^0.116.1"
 uvicorn = "^0.35.0"
 py-ulid = "^1.0.3"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 
 
 [build-system]
