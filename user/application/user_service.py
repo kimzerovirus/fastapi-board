@@ -1,24 +1,20 @@
-from dependency_injector.wiring import Provide, inject
-from typing import Annotated
-from fastapi import HTTPException, Depends
-
-from ulid import ULID
 from datetime import datetime
 
-from containers import Container
-from user.domain.user import User
+from fastapi import HTTPException
+from ulid import ULID
+
 from user.domain.repository.user_repo import IUserRepository
-from user.infra.repository.user_repo import UserRepository
+from user.domain.user import User
 from utils.crpyto import Crypto
 
 
 class UserService:
-    @inject
     def __init__(
         self,
-        user_repo: IUserRepository = Depends(
-            Provide[Container.user_repository]
-        ), # annotated를 사용하라고 fastapi에서는 권장하지만 지금은 에러나나봄
+        user_repo: IUserRepository,
+        # user_repo: IUserRepository = Depends(
+        #     Provide[Container.user_repository]
+        # ), # annotated를 사용하라고 fastapi에서는 권장하지만 지금은 에러나나봄
      ):
         self.user_repo = user_repo
         self.ulid = ULID()
