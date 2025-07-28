@@ -119,3 +119,9 @@ https://fastapi.tiangolo.com/tutorial/dependencies/
 fastapi는 Depends 함수를 이용해 의존성을 주입한다.
 `dependency-injector` 를 이용하면 IoC(제어의 역전) 컨테이너 스타일의 클래스 기반 DI를 지원해서, 더 명시적이고 구조화된 방식으로 의존성을 주입할 수 있음
 ~~근데 이렇게 사용할거면 스프링이 훨 낫지 싶음~~
+
+## pydantic
+EmailStr 타입은 타입선언만으로 이메일 형식을 검증할 수 있다. 다만, 추가 패키지를 필요로 한다.
+```shell
+poetry add "pydantic[email]"
+```

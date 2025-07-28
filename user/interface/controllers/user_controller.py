@@ -3,7 +3,7 @@ from typing import Annotated
 
 from dependency_injector.wiring import inject, Provide
 from fastapi import APIRouter, Depends
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr, Field
 
 from containers import Container
 from user.application.user_service import UserService
@@ -15,9 +15,9 @@ from user.application.user_service import UserService
 router = APIRouter(prefix="/users", tags=["users"])
 
 class CreateUserBody(BaseModel):
-    name: str
-    email: str
-    password: str
+    name: str = Field(min_length=2, max_length=32)
+    email: EmailStr = Field(max_length=64)
+    password: str = Field(min_length=8, max_length=32)
 
 
 class UserResponse(BaseModel):
@@ -41,8 +41,8 @@ def create_user(
     )
 
 class UpdateUser(BaseModel):
-    name: str | None = None
-    password: str | None = None
+    name: str | None = Field(min_length=2, max_length=32, default=None)
+    password: str | None = Field(min_length=8, max_length=32, default=None)
 
 @router.put("/{user_id}")
 @inject
