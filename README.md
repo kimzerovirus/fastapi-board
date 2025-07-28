@@ -125,3 +125,21 @@ EmailStr 타입은 타입선언만으로 이메일 형식을 검증할 수 있�
 ```shell
 poetry add "pydantic[email]"
 ```
+
+## fastapi 비동기
+파이썬의 asyncio 패키지를 기반으로함.
+async, await 이용
+
+## pydantic_settings
+환경 변수 관리
+dotenv
+```shell
+poetry add python-dotenv
+poetry add pydantic-settings
+```
+
+## jwt
+```shell
+poetry add "python-jose[cryptography]" python-multipart
+```
+form-data를 다루기 위한 python-multipart 라이브러리
