@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Annotated
 
 from dependency_injector.wiring import inject, Provide
@@ -17,6 +18,14 @@ class CreateUserBody(BaseModel):
     name: str
     email: str
     password: str
+
+
+class UserResponse(BaseModel):
+    id: str
+    name: str
+    email: str
+    created_at: datetime
+    updated_at: datetime
 
 @router.post("", status_code=201)
 @inject
@@ -47,3 +56,38 @@ def update_user(
         name=user.name,
         password=user.password,
     )
+
+class GetUsersResponse(BaseModel):
+    total_count: int
+    page: int
+    users: list[UserResponse]
+
+
+@router.get("")
+@inject
+def get_users(
+    page: int = 1,
+    items_per_page: int = 10,
+    user_service: UserService = Depends(Provide[Container.user_service]),
+) -> GetUsersResponse:
+    total_count, users = user_service.get_users(page, items_per_page)
+
+    return GetUsersResponse(
+        total_count=total_count,
+        page=page,
+        users=[UserResponse(
+            id=user.id,
+            name=user.name,
+            email=user.email,
+            created_at=user.created_at,
+            updated_at=user.updated_at
+        ) for user in users]
+    )
+
+
+@router.delete("", status_code=204)
+@inject
+def delete_user(
+    user_service: UserService = Depends(Provide[Container.user_service]),
+):
+    user_service.delete_user("")
