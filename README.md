@@ -100,6 +100,8 @@ alembic revision --autogenerate -m "revision message"
 alembic upgrade head
 ```
 위 과정을 통해 데이터베이스에 모델에서 정의한 테이블이 생성된다.
+이러한 마이그레이션 리비전들은 `alembic_version`이라는 테이블에 기록된다.
+버전 지우고 다시 할거면 `DROP TABLE alembic_version;` sql실행해서 버전 지우고 다시 하면 됨
 
 ```python
 import models
