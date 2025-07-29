@@ -143,3 +143,25 @@ poetry add pydantic-settings
 poetry add "python-jose[cryptography]" python-multipart
 ```
 form-data를 다루기 위한 python-multipart 라이브러리
+
+## fastapi middleware
+```python
+from fastapi import FastAPI, Request
+
+@app.middleware("http")
+async def log_request(request: Request, call_next):
+    print(f"Request path: {request.url.path}")
+    response = await call_next(request)
+    print(f"Response status: {response.status_code}")
+    return response
+```
+스프링의 filter나 interceptor 같은 역할을 하는듯, 실행 시점은 요청 전후
+
+## test
+```shell
+poetry add pytest pytest-mock freezegun
+```
+datetime 모듈을 직접 모킹해도 되지만 freezegun의 `@freeze_time` 테커레이터를 이용하면 항상 일정한 시각을 손 쉽게 얻을 수 있음 
+```python
+@freeze_time("2025-01-01")
+```
